@@ -1,0 +1,84 @@
+import { useState } from "react"
+
+const WorkoutForm = () => {
+//create state for each workout that will be typed out
+    const  [title,setTitle] = useState('')
+    const  [reps,setReps] = useState('')
+    const  [set,setSet] = useState('')
+    const  [load,setLoad] = useState('')
+    const  [error, setError] = useState(null)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        //dummy 
+        const workout = {title,reps,set,load}
+
+        //use fetch api to send post request 
+
+        const response = await fetch ('/api/workouts',{
+            method: 'POST',
+            body: JSON.stringify(workout), //changes to striing
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const json = await response.json() //store
+
+        //check if response is ok
+
+        if(!response.ok){
+             setError(json.error)
+        }
+        if(response.ok){
+            setError(null)
+            setTitle('') //reset the form
+            setReps('')
+            setSet('')
+            setLoad('')
+          
+            
+             console.log("New Workout added", json)
+        }
+    }
+    return(
+        //input fields
+        <form className="create" onSubmit={handleSubmit}>
+            <h3> Hello! Let's add a new workout</h3>
+
+            <label> Exercise Title: </label>
+            <input
+            type="text"
+            onChange={(e)=> setTitle(e.target.value)} //input target adn value
+            value={title}
+            />
+
+            <label> Load(in Kg): </label>
+            <input
+            type="number"
+            onChange={(e)=> setLoad(e.target.value)} //input target adn value
+            value={load}
+            />
+
+            <label> Reps: </label>
+            <input
+            type="number"
+            onChange={(e)=> setReps(e.target.value)} //input target adn value
+            value={reps}
+            />
+
+            <label> Sets: </label>
+            <input
+            type="number"
+            onChange={(e)=> setSet(e.target.value)} //input target adn value
+            value={set}
+            />
+           
+           <button>Add Workout</button>
+           {error && <div className="error">{error}</div>}
+        </form>
+    )
+}
+
+export default WorkoutForm
