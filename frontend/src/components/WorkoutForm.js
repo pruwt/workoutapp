@@ -1,12 +1,17 @@
 import { useState } from "react"
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
+
 
 const WorkoutForm = () => {
 //create state for each workout that will be typed out
+const {dispatch} = useWorkoutsContext()
+
     const  [title,setTitle] = useState('')
     const  [reps,setReps] = useState('')
     const  [set,setSet] = useState('')
     const  [load,setLoad] = useState('')
     const  [error, setError] = useState(null)
+    //const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -30,13 +35,17 @@ const WorkoutForm = () => {
 
         if(!response.ok){
              setError(json.error)
+             //setEmptyFields(json.emptyFields)
         }
         if(response.ok){
+           
             setError(null)
             setTitle('') //reset the form
             setReps('')
             setSet('')
             setLoad('')
+            //setEmptyFields([])
+            dispatch({type:'CREATE_WORKOUT',payload: json})
           
             
              console.log("New Workout added", json)
@@ -52,6 +61,7 @@ const WorkoutForm = () => {
             type="text"
             onChange={(e)=> setTitle(e.target.value)} //input target adn value
             value={title}
+            //className={emptyFields.includes('title') ? 'error': ''}
             />
 
             <label> Load(in Kg): </label>
@@ -59,13 +69,17 @@ const WorkoutForm = () => {
             type="number"
             onChange={(e)=> setLoad(e.target.value)} //input target adn value
             value={load}
+            //className={emptyFields.includes('load') ? 'error' : ''}
+
             />
 
-            <label> Reps: </label>
+            <label> Number Reps: </label>
             <input
             type="number"
             onChange={(e)=> setReps(e.target.value)} //input target adn value
             value={reps}
+            //className={emptyFields.includes('reps') ? 'error' : ''}
+
             />
 
             <label> Sets: </label>
@@ -73,6 +87,8 @@ const WorkoutForm = () => {
             type="number"
             onChange={(e)=> setSet(e.target.value)} //input target adn value
             value={set}
+            //className={emptyFields.includes('set') ? 'error' : ''}
+
             />
            
            <button>Add Workout</button>
