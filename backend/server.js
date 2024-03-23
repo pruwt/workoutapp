@@ -2,6 +2,7 @@
 require ('dotenv').config()
 const express = require('express');
 const workoutroutes = require('./routes/workouts');
+const userroutes = require('./routes/user');
 const mongoose = require('mongoose');
 const app = express(); //express app
 
@@ -16,6 +17,10 @@ next()
 // app.get('/',(req,res) =>{
 //     res.json({msg: 'Welcone to the app'})
 // })
+app.use('/api/workouts',workoutroutes)//path first then gets all the routes we've attached, e.g get handler, post etc
+app.use('/api/user',userroutes)//path first then gets all the routes we've attached, e.g get handler, post etc
+
+
 
 //connect to db 
 mongoose.connect(process.env.MONGO_URI)
@@ -30,6 +35,5 @@ mongoose.connect(process.env.MONGO_URI)
     })
 
 
-app.use('/api/workouts',workoutroutes)//path first then gets all the routes we've attached, e.g get handler, post etc
 
 //listen for requests 
