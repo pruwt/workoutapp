@@ -2,7 +2,9 @@ const Workout = require('../models/workoutModel')
 const mongoose = require('mongoose')
 //get all workouts
 const getWorkouts = async(req,res)=>{
-    const workouts = await Workout.find({}).sort({createdAt: -1}) //to get all the docs and then by latest creation sorting
+    const user_id = req.user._id
+
+    const workouts = await Workout.find({user_id}).sort({createdAt: -1}) //to get all the docs and then by latest creation sorting
     res.status(200).json(workouts)//all workout docs sent as json to client
 }
 
@@ -48,15 +50,16 @@ const createWorkout =  async(req,res)=>{
         emptyFields.push('load')
     }
 
-    if(emptyFields.lengt > 0){
+    if(emptyFields.length > 0){
         return res.status(400).json({error: 'Please fill all fields',emptyFields})
     }
 
 
     //create new doc, incase of error , try catch
     try{
+        const user_id = req.user._id
         const workout = await Workout.create({
-            title,reps,set,load})
+            title,reps,set,load,user_id})
             res.status(200).json(workout) //send workout doc created
     } catch(error){
         res.status(400).json({error: error.message}) //send error stat and json respose

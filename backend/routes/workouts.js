@@ -9,8 +9,12 @@ const {
    updateWorkout
 } = require('../controllers/workoutController')
 
+const requireAuth = require('../middleware/requireAuth')
+
 const router = express.Router();
 
+//req auth for all workout routes
+router.use(requireAuth) //in order to access the apis they must be authenticated
 
 //get all workouts
 router.get('/',getWorkouts)
