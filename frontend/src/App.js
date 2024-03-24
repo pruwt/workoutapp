@@ -5,13 +5,15 @@ import Home from './pages/Home'
 import Navbar  from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-
+import CalorieBurnedCalculator from './components/CalorieBurnedCalculator';
+import WorkoutsPage from './pages/WorkoutsPage';
 function App() {
 
   const {user} = useAuthContext()
 
   return (
     <div className="App">
+      {/* <CalorieBurnedCalculator /> */}
      {/* all pages */}
      <BrowserRouter> 
         <Navbar></Navbar>
@@ -30,6 +32,15 @@ function App() {
       path="/signup"
       element ={ !user ? <Signup/> : <Navigate to="/"/>}
     />
+    <Route
+      path="/calorie-calculator"
+      element ={ user ? <CalorieBurnedCalculator/> : <Navigate to="/login"/>}
+    />
+    <Route
+      path="/workouts-res"
+      element ={ user ? <WorkoutsPage/> : <Navigate to="/login"/>}
+    />
+
         </Routes>
       </div>
      </BrowserRouter>
