@@ -121,6 +121,22 @@ nav button {
   margin-left: 10px;
 }
 
+.calorie-calculator {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+
 /* auth forms */
 form.signup, form.login {
   max-width: 400px;
@@ -128,4 +144,46 @@ form.signup, form.login {
   padding: 20px;
   background: #fff;
   border-radius: 4px;
+}
+/* Workout cards */
+.workout-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive layout for cards */
+  gap: 20px;
+  padding: 20px;
+}
+
+.workout-card {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Clip content if image overflows */
+  transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+.workout-card:hover {
+  transform: scale(1.02); /* Slight zoom on hover */
+}
+
+.workout-card-image {
+  width: 100%;
+  height: 200px; /* Adjust image height as needed */
+  object-fit: cover; /* Maintain aspect ratio and crop if needed */
+}
+
+.workout-card-content {
+  padding: 20px;
+}
+
+.workout-card-content h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1em;
+  color: var(--primary);
+}
+
+.workout-card-content p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.5; /* Improve readability */
 }
