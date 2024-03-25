@@ -19,17 +19,18 @@ next()
 // app.get('/',(req,res) =>{
 //     res.json({msg: 'Welcone to the app'})
 // })
-const cors = require('cors');
 
-// const app = express();
+// const cors = require('cors');
 
-const allowedOrigins = ['https://frontend-flame-phi-20.vercel.app/']; // Replace with your actual domain
+// // const app = express();
 
-const options = {
-  origin: allowedOrigins,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//   credentials: true, // Include if sending cookies
-};
+// const allowedOrigins = ['https://frontend-flame-phi-20.vercel.app/']; // Replace with your actual domain
+
+// const options = {
+//   origin: allowedOrigins,
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+// //   credentials: true, // Include if sending cookies
+// };
 
 app.use(cors(options));
 
