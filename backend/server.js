@@ -4,8 +4,9 @@ const express = require('express');
 const workoutroutes = require('./routes/workouts');
 const userroutes = require('./routes/user');
 const mongoose = require('mongoose');
-const app = express(); //express app
+const cors = require('cors')
 
+const app = express(); //express app
 
 //middleware logger for each req and type of req
 app.use(express.json());
@@ -18,6 +19,21 @@ next()
 // app.get('/',(req,res) =>{
 //     res.json({msg: 'Welcone to the app'})
 // })
+const cors = require('cors');
+
+// const app = express();
+
+const allowedOrigins = ['https://frontend-flame-phi-20.vercel.app/']; // Replace with your actual domain
+
+const options = {
+  origin: allowedOrigins,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true, // Include if sending cookies
+};
+
+app.use(cors(options));
+
+
 app.use('/api/workouts',workoutroutes)//path first then gets all the routes we've attached, e.g get handler, post etc
 app.use('/api/user',userroutes)//path first then gets all the routes we've attached, e.g get handler, post etc
 
