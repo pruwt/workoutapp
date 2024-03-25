@@ -10,6 +10,7 @@ return jwt.sign({_id}, process.env.SECRET,{expiresIn: '3d'}) //user logged in fo
 //login user
 const loginUser = async (req,res) =>{
     const {email,password} = req.body
+    console.log(req.body)
 
     try{
         const user = await User.login(email,password)
@@ -17,10 +18,10 @@ const loginUser = async (req,res) =>{
         //create token 
         const token = createToken(user._id)
 
-        res.status(200).json({email,token})
+        return res.status(200).json({email,token})
     }
     catch(error){
-        res.status(400).json({error: error.message})
+        return res.status(400).json({error: error.message})
     }
 
 }
