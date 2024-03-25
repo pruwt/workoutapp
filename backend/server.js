@@ -5,11 +5,18 @@ const workoutroutes = require('./routes/workouts');
 const userroutes = require('./routes/user');
 const mongoose = require('mongoose');
 const cors = require('cors')
+const path = require('path')
 
 const app = express(); //express app
 
+app.use(express.static("./frontend/build"))
+app.get("*",(req,res) => {
+res.sendFile(path.resolve(__dirname,"frontend","build","index.html"))
+})
 //middleware logger for each req and type of req
 app.use(express.json());
+
+
 
 app.use((req,res,next)=>{ 
 console.log(req.path, req.method)
@@ -32,13 +39,14 @@ next()
 // //   credentials: true, // Include if sending cookies
 // };
 
-app.use(cors(options));
+//app.use(cors(options));
+
 
 
 app.use('/api/workouts',workoutroutes)//path first then gets all the routes we've attached, e.g get handler, post etc
 app.use('/api/user',userroutes)//path first then gets all the routes we've attached, e.g get handler, post etc
 
-
+//production scripts
 
 //connect to db 
 mongoose.connect(process.env.MONGO_URI)
