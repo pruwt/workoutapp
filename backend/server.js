@@ -5,11 +5,11 @@ const workoutroutes = require('./routes/workouts');
 const userroutes = require('./routes/user');
 const mongoose = require('mongoose');
 const app = express(); //express app
-const cors = require('cors')
+
 
 //middleware logger for each req and type of req
 app.use(express.json());
-app.use(cors())
+
 app.use((req,res,next)=>{ 
 console.log(req.path, req.method)
 next()
