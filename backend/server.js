@@ -9,14 +9,13 @@ const path = require('path')
 
 const app = express(); //express app
 
+//middleware logger for each req and type of req
+app.use(express.json());
+
 app.use(express.static("./frontend/build"))
 app.get("*",(req,res) => {
 res.sendFile(path.resolve(__dirname,"frontend","build","index.html"))
 })
-//middleware logger for each req and type of req
-app.use(express.json());
-
-
 
 app.use((req,res,next)=>{ 
 console.log(req.path, req.method)
