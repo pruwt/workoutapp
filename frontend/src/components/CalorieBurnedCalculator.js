@@ -13,7 +13,7 @@ const activityLevels = {
 
 const calculateCaloriesBurned = (weight, duration, activityLevel, reps) => {
   
-  const MET = 8; // Metabolic Equivalent of the activity (adjust based on exercise)
+  const MET = 5; // Metabolic Equivalent of the activity (adjust based on exercise) moderate
   const totalMinutes = duration / 60;
   return (MET * weight * totalMinutes * activityLevel) + (reps * 0.05); // Add a calorie burn for reps
 };
