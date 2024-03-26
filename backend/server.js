@@ -18,9 +18,9 @@ app.use(express.json());
 // res.sendFile(path.resolve(__dirname,"frontend","build","index.html"))
 // })
 
-app.use(cors({
-    origin: 'https://workoutapp-eta.vercel.app/'
-  }));
+// app.use(cors({
+//     origin: 'https://workoutapp-eta.vercel.app/'
+//   }));
   
 app.use((req,res,next)=>{ 
 console.log(req.path, req.method)
@@ -31,14 +31,14 @@ next()
 
 // const app = express();
 
-// const allowedOrigins = ['https://frontend-flame-phi-20.vercel.app/']; // Replace with your actual domain
+const allowedOrigins = ['https://workoutapp-eta.vercel.app/']; // Replace with your actual domain
 
-// const options = {
-//   origin: allowedOrigins,
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-// //   credentials: true, // Include if sending cookies
-// };
-//app.use(cors(options));
+const options = {
+  origin: allowedOrigins,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true, // Include if sending cookies
+};
+app.use(cors(options));
 
 
 
