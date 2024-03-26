@@ -4,31 +4,32 @@ const express = require('express');
 const workoutroutes = require('./routes/workouts');
 const userroutes = require('./routes/user');
 const mongoose = require('mongoose');
-const cors = require('cors')
 const path = require('path')
-
+const cors = require('cors');
 const app = express(); //express app
 
 //middleware logger for each req and type of req
+app.use(cors());
+
 app.use(express.json());
 
-app.use(express.static("frontend/build"))
-app.get("*",(req,res) => {
-res.sendFile(path.resolve(__dirname,"frontend","build","index.html"))
-})
+// app.use(express.static("frontend/build"))
+// app.get("*",(req,res) => {
+// res.sendFile(path.resolve(__dirname,"frontend","build","index.html"))
+// })
 
+app.use(cors({
+    origin: 'https://workoutapp-eta.vercel.app'
+  }));
+  
 app.use((req,res,next)=>{ 
 console.log(req.path, req.method)
 next()
 })
-//routes
-// app.get('/',(req,res) =>{
-//     res.json({msg: 'Welcone to the app'})
-// })
 
-// const cors = require('cors');
 
-// // const app = express();
+
+// const app = express();
 
 // const allowedOrigins = ['https://frontend-flame-phi-20.vercel.app/']; // Replace with your actual domain
 
@@ -37,7 +38,6 @@ next()
 //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 // //   credentials: true, // Include if sending cookies
 // };
-
 //app.use(cors(options));
 
 
