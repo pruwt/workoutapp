@@ -19,7 +19,7 @@ app.use(express.json());
 // })
 
 app.use(cors({
-    origin: 'https://workoutapp-eta.vercel.app'
+    origin: 'https://workoutapp-eta.vercel.app/'
   }));
   
 app.use((req,res,next)=>{ 
